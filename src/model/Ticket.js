@@ -5,10 +5,14 @@ class Ticket extends Model {}
 
 Ticket.init({
   id: {
-    type: DataTypes.UUID,
+    type: DataTypes.INTEGER,
     primaryKey: true,
-    defaultValue: UUIDV4
+    autoIncrement: true
   },  
+  title:{
+      type: DataTypes.STRING,
+      allowNull: false
+  },
   description: {
     type: DataTypes.STRING(510),
     allowNull: false
@@ -17,16 +21,25 @@ Ticket.init({
     type: DataTypes.UUID,
     allowNull: false
   },
-  prioridade:{
-    type: DataTypes.VIRTUAL,
-    allowNull: true
-  },
-  nivel: {
+  priority:{
     type: DataTypes.INTEGER,
-    defaultValue: false,
+    allowNull: false
+  },
+  gravity:{
+    type: DataTypes.INTEGER,
+    allowNull: false
+  },
+  urgency: {
+    type: DataTypes.INTEGER,
+    allowNull: false
+  },
+  tendency: {
+      type: DataTypes.INTEGER,
+      allowNull: false
   },
   status:{
-
+      type: DataTypes.ENUM('um', 'dois'),
+      defaultValue: "um"
   }
 }, {
   sequelize,
