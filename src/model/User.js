@@ -1,33 +1,33 @@
-const { DataTypes, Model } = require('sequelize');
+const { DataTypes, Model, UUIDV4 } = require('sequelize');
 const { sequelize } = require('../sequelize');
 
-class Task extends Model {}
+class User extends Model {}
 
-Task.init({
+User.init({
   id: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.UUID,
     primaryKey: true,
-    autoIncrement: true
+    defaultValue: UUIDV4
   },  
-  taskName: {
+  name: {
     type: DataTypes.STRING,
     allowNull: false
   },
-  details:{
-    type: DataTypes.STRING(510),
+  username:{
+    type: DataTypes.STRING,
     allowNull: true
   },
-  order:{
+  password:{
+    type: DataTypes.VIRTUAL,
+    allowNull: true
+  },
+  perfil: {
     type: DataTypes.INTEGER,
-    allowNull: true
-  },
-  completed: {
-    type: DataTypes.BOOLEAN,
-    defaultValue: false
+    defaultValue: false,
   }
 }, {
   sequelize,
-  modelName: 'Task'
+  modelName: 'User'
 });
 
-module.exports = Task;
+module.exports = User;
