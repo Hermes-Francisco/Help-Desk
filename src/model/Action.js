@@ -1,16 +1,18 @@
-const { DataTypes } = require("sequelize/types");
+const { DataTypes, Model } = require("sequelize");
+const { sequelize } = require('../sequelize');
+const Ticket = require("./Ticket");
 
-class Action extends Model {}
+class Action extends Model {
+    static associations(model){
+        Action.belongsTo(model.Tickets);
+    }
+}
 
 Action.init({
   id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
     autoIncrement: true
-  },  
-  ticket_id: {
-      type: DataTypes.INTEGER,
-      allowNull: false
   },
   description: {
     type: DataTypes.STRING(510),
@@ -24,5 +26,5 @@ Action.init({
   sequelize,
   modelName: 'Action'
 });
-
+Action.belongsTo(Ticket);
 module.exports = Action;
