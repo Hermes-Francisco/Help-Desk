@@ -18,9 +18,11 @@ class App{
     router(){
         this.app.use(routes);
     }
-    inicio(){
-        Ticket.sync({force:true});
-        Action.sync({force:true});
+    async inicio(){
+        Action.drop();
+        Ticket.sync({force:true}).then(()=>{
+            Action.sync({force:true})
+        });  
     }
 }
 module.exports = new App().app;

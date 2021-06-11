@@ -1,12 +1,7 @@
 const { DataTypes, Model, UUIDV4 } = require('sequelize');
 const { sequelize } = require('../sequelize');
-const Action = require('./Action');
 
-class Ticket extends Model {
-    static associations(model){
-        Ticket.hasMany(model.Actions);
-    }
-}
+class Ticket extends Model {}
 
 Ticket.init({
   id: {

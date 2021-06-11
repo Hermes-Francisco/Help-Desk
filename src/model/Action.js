@@ -1,11 +1,7 @@
 const { DataTypes, Model } = require("sequelize");
 const { sequelize } = require('../sequelize');
-const Ticket = require("./Ticket");
 
 class Action extends Model {
-    static associations(model){
-        Action.belongsTo(model.Tickets);
-    }
 }
 
 Action.init({
@@ -21,10 +17,18 @@ Action.init({
   user_id:{
     type: DataTypes.UUID,
     allowNull: false
+  },
+  ticket_id:{
+    type: DataTypes.INTEGER,
+    references:{
+      model: "Tickets",
+      key:'id',
+      onDelete: 'CASCADE'
+    }
   }
 }, {
   sequelize,
   modelName: 'Action'
 });
-Action.belongsTo(Ticket);
+
 module.exports = Action;
